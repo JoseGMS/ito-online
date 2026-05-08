@@ -153,10 +153,10 @@ export default function RoomPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-500 via-pink-500 to-red-500 flex items-center justify-center">
-        <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
-          <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-purple-600" />
-          <p className="text-gray-600">Carregando sala...</p>
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 flex items-center justify-center">
+        <div className="bg-gray-800 border border-gray-700 rounded-2xl shadow-2xl p-8 text-center">
+          <Loader2 className="w-12 h-12 animate-spin mx-auto mb-4 text-purple-400" />
+          <p className="text-gray-300">Carregando sala...</p>
         </div>
       </div>
     );
@@ -164,13 +164,13 @@ export default function RoomPage() {
 
   if (error || !room) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-500 via-pink-500 to-red-500 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl shadow-xl p-8 text-center max-w-md">
-          <h2 className="text-2xl font-bold text-red-600 mb-4">Erro</h2>
-          <p className="text-gray-600 mb-6">{error || 'Sala não encontrada'}</p>
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 flex items-center justify-center p-4">
+        <div className="bg-gray-800 border border-gray-700 rounded-2xl shadow-2xl p-8 text-center max-w-md">
+          <h2 className="text-2xl font-bold text-red-400 mb-4">Erro</h2>
+          <p className="text-gray-300 mb-6">{error || 'Sala não encontrada'}</p>
           <button
             onClick={() => router.push('/')}
-            className="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-purple-700 hover:to-pink-700"
+            className="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-purple-700 hover:to-pink-700 shadow-lg"
           >
             Voltar ao Início
           </button>
@@ -182,7 +182,7 @@ export default function RoomPage() {
   const myPlayer = players.find((p) => p.id === myPlayerId);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-500 via-pink-500 to-red-500 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 py-8 px-4">
       {room.status === 'lobby' && (
         <Lobby
           roomCode={roomCode}

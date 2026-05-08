@@ -3,7 +3,10 @@
     "allow": [
       "Bash(npx create-next-app@latest . --typescript --tailwind --app --no-src --import-alias \"@/*\")",
       "Bash(npm install @supabase/supabase-js @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities zustand)",
-      "Bash(npm install lucide-react)"
+      "Bash(npm install lucide-react)",
+      "Bash(git add .)",
+      "Bash(git commit -m \"Update: Mobile-optimized drag-and-drop + Full dark mode UI\")",
+      "Bash(git push)"
     ],
     "deny": [],
     "ask": []
