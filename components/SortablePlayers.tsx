@@ -26,6 +26,7 @@ interface SortablePlayersProps {
   theme: string;
   isHost: boolean;
   onConfirmOrder: (orderedPlayerIds: string[]) => void;
+  onDraggingChange?: (isDragging: boolean) => void;
 }
 
 interface SortableItemProps {
@@ -78,6 +79,7 @@ export default function SortablePlayers({
   theme,
   isHost,
   onConfirmOrder,
+  onDraggingChange,
 }: SortablePlayersProps) {
   const [items, setItems] = useState<Player[]>([]);
   const [confirmed, setConfirmed] = useState(false);
@@ -107,11 +109,13 @@ export default function SortablePlayers({
 
   const handleDragStart = (event: any) => {
     setActiveId(event.active.id);
+    onDraggingChange?.(true);
   };
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     setActiveId(null);
+    onDraggingChange?.(false);
 
     if (over && active.id !== over.id) {
       setItems((items) => {

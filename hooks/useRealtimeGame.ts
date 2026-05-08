@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { Room, Player, ChatMessage } from '@/types/game';
 
-export const useRealtimeGame = (roomCode: string) => {
+export const useRealtimeGame = (roomCode: string, pausePolling = false) => {
   const [room, setRoom] = useState<Room | null>(null);
   const [players, setPlayers] = useState<Player[]>([]);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -66,9 +66,9 @@ export const useRealtimeGame = (roomCode: string) => {
     // Initial fetch
     fetchGameData();
 
-    // Poll for updates every 2 seconds
+    // Poll for updates every 2 seconds (but pause when needed)
     pollInterval = setInterval(() => {
-      if (mounted) {
+      if (mounted && !pausePolling) {
         fetchGameData();
       }
     }, 2000);
@@ -80,7 +80,7 @@ export const useRealtimeGame = (roomCode: string) => {
         clearInterval(pollInterval);
       }
     };
-  }, [roomCode, loading]);
+  }, [roomCode, loading, pausePolling]);
 
   return {
     room,

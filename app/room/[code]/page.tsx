@@ -17,7 +17,8 @@ export default function RoomPage() {
   const router = useRouter();
   const roomCode = params.code as string;
 
-  const { room, players, loading, error } = useRealtimeGame(roomCode);
+  const [isDragging, setIsDragging] = useState(false);
+  const { room, players, loading, error } = useRealtimeGame(roomCode, isDragging);
   const [playerName, setPlayerName] = useState('');
   const [isHost, setIsHost] = useState(false);
   const [myPlayerId, setMyPlayerId] = useState<string | null>(null);
@@ -212,6 +213,7 @@ export default function RoomPage() {
           theme={room.theme || ''}
           isHost={isHost}
           onConfirmOrder={handleConfirmOrder}
+          onDraggingChange={setIsDragging}
         />
       )}
 
