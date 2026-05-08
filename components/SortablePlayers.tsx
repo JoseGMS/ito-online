@@ -84,11 +84,15 @@ export default function SortablePlayers({
   const [items, setItems] = useState<Player[]>([]);
   const [confirmed, setConfirmed] = useState(false);
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [hasReordered, setHasReordered] = useState(false);
 
   useEffect(() => {
-    const playersWithClues = players.filter((p) => p.clue);
-    setItems(playersWithClues);
-  }, [players]);
+    // Only update items from props if user hasn't manually reordered yet
+    if (!hasReordered) {
+      const playersWithClues = players.filter((p) => p.clue);
+      setItems(playersWithClues);
+    }
+  }, [players, hasReordered]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -118,6 +122,7 @@ export default function SortablePlayers({
     onDraggingChange?.(false);
 
     if (over && active.id !== over.id) {
+      setHasReordered(true); // Mark that user has manually reordered
       setItems((items) => {
         const oldIndex = items.findIndex((item) => item.id === active.id);
         const newIndex = items.findIndex((item) => item.id === over.id);
